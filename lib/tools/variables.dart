@@ -10,7 +10,45 @@ double getHeightSize(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-// Function to determine the crossAxisCount based on screen width
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*// Function to determine the crossAxisCount based on screen width
 int getCrossAxisCount(BuildContext context) {
   double widthSize = getWidthSize(context);
   return (widthSize < 500) ? 2 :
@@ -19,10 +57,11 @@ int getCrossAxisCount(BuildContext context) {
 }
 
 // Function to determine child aspect ratio based on screen width
+
 double getChildAspectRatio(BuildContext context) {
   double widthSize = getWidthSize(context);
   return (widthSize < 360) ? 0.62 :
-  (widthSize < 430) ? 0.75 :
+  (widthSize < 430) ? 0.55 :
   (widthSize < 500) ? 0.9 :
   (widthSize < 550) ? 0.68 :
   (widthSize < 650) ? 0.75 :
@@ -32,5 +71,6 @@ double getChildAspectRatio(BuildContext context) {
   (widthSize < 1200) ? 1.1 :
   (widthSize < 1300) ? 1 : 1;
 }
+*/
 
 

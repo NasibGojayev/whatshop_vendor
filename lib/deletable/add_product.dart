@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -6,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
-import 'package:whatshop_vendor/tools/api.dart';
+import 'package:whatshop_vendor/tools/google_cloud_api.dart';
 
 import '../bloc_management/product_bloc.dart';
 import '../bloc_management/product_event.dart';
@@ -88,7 +89,7 @@ class _AddProductState extends State<AddProduct> {
       body: SafeArea(
           child: //_imageBytes == null? Text('no image'):
           SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               width: widthSize*0.9,
               height: heightSize*0.7,
               child: Column(
@@ -263,3 +264,4 @@ class Item extends StatelessWidget {
     );
   }
 }
+*/

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:whatshop_vendor/bloc_management/product_event.dart';
-import 'package:whatshop_vendor/pages/home_page.dart';
-import 'package:whatshop_vendor/pages/add_product.dart';
-import 'package:whatshop_vendor/tools/navigation_menu.dart';
-import 'package:whatshop_vendor/tools/stemmer.dart';
-import 'bloc_management/product_bloc.dart';
+import 'package:whatshop_vendor/bloc_management/vendor_bloc/vendor_bloc.dart';
+import 'package:whatshop_vendor/tools/app_route_config.dart';
+import 'bloc_management/product_bloc/product_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
 import 'package:google_fonts/google_fonts.dart';
+
+import 'bloc_management/product_bloc/product_event.dart';
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized(); // Ensure initialization
   try {
-    final stemmer = Stemmer();
-    await stemmer.loadResources();
+
 
     await Supabase.initialize(
       url: 'https://lwdszubkpfrnyduswzfs.supabase.co',
@@ -26,8 +24,9 @@ void main() async {
         ],
         child: MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => ProductBloc()),
-              BlocProvider(create: (context) => NavigatorCubit()),
+              BlocProvider(create: (context) => ProductBloc()..add(FetchProductsEvent())),
+              BlocProvider(create: (context) => VendorBloc()),
+              //BlocProvider(create: (context) => NavigatorCubit()),
             ],
             child: const MyApp())));
   } catch (e) {
@@ -40,13 +39,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.lexendDecaTextTheme(),
       ),
-      title: 'Instruments',
-      home: const NavigationMenu(),
+      title: 'Vendor App',
+      routerConfig: router,
     );
   }
 }

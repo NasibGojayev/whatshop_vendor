@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:whatshop_vendor/bloc_management/product_bloc.dart';
 import 'package:whatshop_vendor/bloc_management/product_state.dart';
@@ -50,72 +51,4 @@ class PlayGroundSup extends StatelessWidget {
   }
 }
 
-class Item extends StatelessWidget {
-
-  final Image image;
-  final String id;
-  final String name;
-  final num price;
-  final Widget icon;
-  final VoidCallback onPressed;
-  const Item({
-    super.key,
-    required this.id,
-    required this.icon,
-    required this.onPressed,
-    required this.image,
-    required this.name,
-    required this.price,
-
-  });
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    //double widthSize = MediaQuery.of(context).size.width;
-    //double heightSize = MediaQuery.of(context).size.height;
-    return Container(
-      color: Colors.grey, // Light grey background
-      child: Column(
-        mainAxisSize: MainAxisSize.min, // Allow content to grow naturally
-        children: [
-          Align(
-              alignment: Alignment.topRight,
-              child: IconButton(onPressed: onPressed, icon: icon)),
-
-          Container(
-            width: 130,
-            height: 130,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            clipBehavior: Clip.hardEdge, // Clip content to fit within rounded corners
-            child: image,
-          ),
-          SizedBox(height: 8),
-          Text(
-            name,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.black.withValues(alpha: 0.45),
-              fontSize: 14,
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          SizedBox(height: 4),
-          Text(
-            "$price AZN", // Assuming price is a double value, adding a '$' symbol
-            style: TextStyle(
-              color: Color(0xFF1E1E1E),
-              fontSize: 16,
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+*/

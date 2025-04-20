@@ -1,74 +1,62 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:whatshop_vendor/pages/add_product.dart';
-import 'package:whatshop_vendor/tools/colors.dart';
+import 'package:go_router/go_router.dart';
 
-import '../addAProduct.dart';
-import '../pages/home_page.dart';
-import '../pages/profile.dart';
-
-
+import 'colors.dart';
 
 class NavigationMenu extends StatelessWidget {
-  const NavigationMenu({super.key});
+  final Widget child; // <-- This is the page rendered
+  const NavigationMenu({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
+    final location = GoRouter.of(context).state.matchedLocation;
+
     return Scaffold(
-      floatingActionButton:
-          Container(
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              color: mainBlue,
-            ),
-            child: IconButton(
-              onPressed: () {
-                context.read<NavigatorCubit>().changeIndex(1);
-              },
-              icon: Icon(Icons.add,color: Colors.white,),
-            ),
 
-          ),
+      bottomNavigationBar: NavigationBar(
+        height: 80,
+        elevation: 0,
+        selectedIndex: _calculateSelectedIndex(location),
+        onDestinationSelected: (index) {
+          switch (index) {
+            case 0:
 
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BlocBuilder<NavigatorCubit,int>(
-              builder: (context,state) {
-              return NavigationBar(
-                  height: 80,
-                  elevation: 0,
-                  selectedIndex: state,
-                  onDestinationSelected: (index) =>
-                      context.read<NavigatorCubit>().changeIndex(index),
-                  destinations: const[
-                    NavigationDestination(icon: Icon(Icons.home), label: 'Ana səhifə'),
-                    NavigationDestination(icon: Icon(Icons.add), label: 'Sat'),
-                    NavigationDestination(
-                        icon: Icon(Icons.manage_accounts), label: 'Profil'),
+              if(!location.startsWith('/home')){
+                context.push('/home');
+              }
+              break;
+            case 1:
 
-                  ]
-              );
-            }
-          ),
-          body: BlocBuilder<NavigatorCubit,int>(
-            builder: (context,state) {
-              return context.read<NavigatorCubit>().pages[state];
-            }
-          ),
-        );
+              if(!location.startsWith('/all_products')){
+                context.push('/all_products');
+              }
+              break;
+
+            case 2:
+
+              if(!location.startsWith('/profile')){
+                context.push('/profile');
+              }
+              break;
+          }
+        },
+        destinations: [
+          NavigationDestination(icon: const Icon(Icons.home_outlined), label: 'Ana səhifə',selectedIcon: Icon(Icons.home,color: mainBlue,),),
+          NavigationDestination(icon: const Icon(Icons.list_alt_outlined), label: 'Məhsullarım',selectedIcon: Icon(Icons.list_alt,color: mainBlue,),),
+          NavigationDestination(icon: const Icon(Icons.manage_accounts_outlined), label: 'Profil',selectedIcon: Icon(Icons.manage_accounts,color: mainBlue,),),
+        ],
+      ),
+      body: child,
+    );
   }
-}
 
-class NavigatorCubit extends Cubit<int>{
-  NavigatorCubit():super(0);
-  void changeIndex(int index){
-    emit(index);
+  int _calculateSelectedIndex(String location) {
+    if (location.startsWith('/home')) return 0;
+    if (location.startsWith('/all_products')) return 1;
+    if (location.startsWith('/profile')) return 2;
+
+
+    return 0;
   }
-  final pages = [
-    HomePage(),
-    AddAProduct(),
-    AddProduct(),
-
-  ];
 }
